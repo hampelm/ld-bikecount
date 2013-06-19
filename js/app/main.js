@@ -1,4 +1,4 @@
-define(['jquery', 'jquery.touch'], function($) {
+define(['jquery', 'jquery.hammer'], function($) {
   $(function() {
 
     var app = {
@@ -7,7 +7,9 @@ define(['jquery', 'jquery.touch'], function($) {
       counter: 0,
 
       init: function() {
-        $('.in').click(app.select);
+        var hammertime = $("body").hammer();
+
+        $('.in').on('touch', app.select);
       },
 
       /**
@@ -15,7 +17,7 @@ define(['jquery', 'jquery.touch'], function($) {
        */
       select: function(e) {
         e.preventDefault();
-        var $t = $(e.target);
+        var $t = $(this);
         $t.closest('.question').find('.in').removeClass('selected');
         $t.toggleClass('selected');
 
