@@ -1,4 +1,4 @@
-define(['jquery', 'lodash'], function($) {
+define(['jquery', 'jquery.touch'], function($) {
   $(function() {
 
     var app = {
