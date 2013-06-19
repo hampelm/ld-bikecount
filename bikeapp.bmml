@@ -1,0 +1,42 @@
+<mockup version="1.0" skin="wireframe" fontFace="Balsamiq Sans" measuredW="936" measuredH="821" mockupW="454" mockupH="821">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="482" y="0" w="454" h="821" measuredW="282" measuredH="510" zOrder="0" locked="true" isInGroup="-1"/>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::ButtonBar" x="529" y="299" w="360" h="81" measuredW="300" measuredH="31" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>North%2C%20South%2C%20East%2C%20West</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::ButtonBar" x="529" y="410" w="360" h="75" measuredW="166" measuredH="31" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Male%2C%20Female</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::ButtonBar" x="529" y="513" w="360" h="74" measuredW="268" measuredH="31" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>-1</selectedIndex>
+        <size>20</size>
+        <text>With%2C%20Against%2C%20Sidewalk</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Title" x="660" y="175" w="-1" h="-1" measuredW="99" measuredH="33" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>you%27re%20at</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Title" x="612" y="635" w="-1" h="-1" measuredW="195" measuredH="33" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>34%20counted%20so%20far</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::ComboBox" x="548" y="211" w="-1" h="-1" measuredW="318" measuredH="44" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>32</size>
+        <text>MLK%20and%20Woodward</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
