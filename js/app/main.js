@@ -30,11 +30,18 @@ define(['jquery', 'jquery.hammer'], function($) {
         }
       },
 
+      /**
+       *
+       * Things that should happen when all the fields are complete
+       */
       finished: function() {
+        // reset the app after a brief delay
+        // it it happens immediately, the user doesn't get enough feedback
         window.setTimeout(app.reset, 100);
       },
 
       /**
+       * Have all the fields been submitted?
        * Returns true if all three fields are complete
        * @return {Boolean}
        */
@@ -46,14 +53,18 @@ define(['jquery', 'jquery.hammer'], function($) {
       },
 
       /**
-       * Resets the fields, visually indicates we're submitting the data.
+       * Reset the fields, visually indicate we're submitting the data.
        */
       reset: function() {
         console.log("Done!");
         app.answered = {};
-        app.counter += 1;
         $('.in').removeClass('selected');
         $('body').addClass('done').delay(500).removeClass('done');
+
+        // Update the counter
+        app.counter += 1;
+        var label = (app.counter === 1) ? 'response' : 'responses';
+        $('.counter').html(app.counter + ' ' + label);
       }
 
     };

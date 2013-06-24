@@ -1,8 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: Open Sans;
   font-weight: 300;
-  margin: 0;
-  padding: 0;
   background: #fff;
 }
 
@@ -15,8 +22,36 @@ body,
   transition: background 5s ease;
 }
 
+h1,
+h2,
+input,
+select,
+select option {
+  font-weight: 300;
+}
+
+input,
+select,
+select option {
+  font-family: Open Sans;
+  font-size:30px;
+  border:0px solid #fff;
+  border-bottom: 1px dotted #666;
+}
+
+input, select {
+  display:block;
+  margin-bottom:10px;
+}
+
+.wrap {
+  min-height: 100%;
+}
+
 .container {
-  margin: 20px;
+  margin: 20px 20px 0 20px;
+  overflow: auto;
+  padding-bottom: 50px;
 }
 
 .question {
@@ -32,7 +67,7 @@ body,
 }
 
 .question .answer .in {
-  padding: 40px 20px;
+  padding: 30px 20px;
   border: 1px solid #ccc;
   border-left: 0;
   background: #eee;
@@ -86,3 +121,19 @@ body,
 .answer:first-child:nth-last-child(4) ~ .answer {
     width: 25%;
 }
+
+
+.counter {
+  line-height: 50px;
+  font-size:25px;
+}
+
+.footer {
+  position: relative;
+  margin-top: -75px; /* negative value of footer height */
+  height: 50px;
+  clear: both;
+  text-align: center;
+  background:#eee;
+}
+
