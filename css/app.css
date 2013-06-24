@@ -1,3 +1,13 @@
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -44,14 +54,42 @@ input, select {
   margin-bottom:10px;
 }
 
+.name {
+  margin-top:15px;
+  color: #00949b;
+}
+
 .wrap {
   min-height: 100%;
+}
+
+.go {
+  padding:15px 75px 15px 75px;
+  color: #fff;
+  font-size: 20px;
+  background: #39abb7;
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .container {
   margin: 20px 20px 0 20px;
   overflow: auto;
   padding-bottom: 50px;
+}
+
+.welcome,
+.form,
+.footer {
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.form,
+.footer {
+  display: none;
 }
 
 .question {
@@ -122,13 +160,13 @@ input, select {
     width: 25%;
 }
 
-
 .counter {
   line-height: 50px;
   font-size:25px;
 }
 
 .footer {
+  display: none;
   position: relative;
   margin-top: -75px; /* negative value of footer height */
   height: 50px;

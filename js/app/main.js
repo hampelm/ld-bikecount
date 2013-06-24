@@ -4,12 +4,30 @@ define(['jquery', 'jquery.hammer'], function($) {
     var app = {
 
       answered: {},
+      name: '',
+      location: '',
       counter: 0,
 
       init: function() {
         var hammertime = $("body").hammer();
 
+        $('.go').on('touch', app.start);
         $('.in').on('touch', app.select);
+      },
+
+      /**
+       * Start the app
+       * Get the user's name and location
+       */
+      start: function(e) {
+        e.preventDefault();
+        var $t = $(this);
+        app.name = $t.parent().find('.name').val();
+        app.location = $t.parent().find('.location').val();
+        console.log(app.name, app.location);
+        $('.welcome').hide();
+        $('.form').show();
+        $('.footer').show();
       },
 
       /**
