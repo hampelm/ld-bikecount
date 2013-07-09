@@ -2,10 +2,14 @@ requirejs.config({
     "baseUrl": "js/lib",
     "paths": {
       "app": "../app",
-      "jquery": "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min"
+      "jquery": "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min",
+      "underscore": "lodash"
     },
     "shim": {
-        "jquery.hammer": ["jquery"]
+      "jquery.hammer": {
+        deps: ["jquery"],
+        exports: '$'
+      }
     }
 });
 

@@ -80,16 +80,24 @@ input, select {
   padding-bottom: 50px;
 }
 
+.loading,
 .welcome,
+.connection-error,
 .form,
 .footer {
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
 }
 
+.connection-error,
+.welcome,
 .form,
 .footer {
   display: none;
+}
+
+.form h1 {
+  font-size:18px;
 }
 
 .question {
@@ -158,6 +166,14 @@ input, select {
 .answer:first-child:nth-last-child(4),
 .answer:first-child:nth-last-child(4) ~ .answer {
     width: 25%;
+}
+
+.connection-error {
+  line-height: 25px;
+  background: #fcffc6;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .counter {
