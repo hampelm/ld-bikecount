@@ -41,16 +41,12 @@
         <h2>What's your name and location?</h2>
         <input type="text" placeholder="name" class="name">
         <select class="location">
-          <option value="Midtown: Cass at Canfield">Midtown: Cass at Canfield                        </option>
-          <option value="Villages: E. Jefferson area">Villages: E. Jefferson area                      </option>
-          <option value="Dequindre Cut at Atwater">Dequindre Cut at Atwater                         </option>
-          <option value="Corktown: Michigan Ave at 14th">Corktown: Michigan Ave at 14th                   </option>
-          <option value="Woodward north of McNichols">Woodward north of McNichols                      </option>
-          <option value="Hamtramck: Jos Campau at Holbrook">Hamtramck: Jos Campau at Holbrook                </option>
-          <option value="Eastside: Gratiot at Conner Creek Greenway">Eastside: Gratiot at Conner Creek Greenway       </option>
-          <option value="Rosedale-Grandmont: W. Outer Drive at Grand River">Rosedale-Grandmont: W. Outer Drive at Grand River</option>
-          <option value="SW Detroit: W. Vernor at Springwells">SW Detroit: W. Vernor at Springwells             </option>
         </select>
+        <script type="text/template" id="options">
+          <% _.each( locations, function( location ){ %>
+          <option value="<%= location.name %>" data-location="<%= location.location %>"><%= location.name %></option>
+          <% }); %>
+        </script>
 
         <div class="go">Go</div>
       </div>

@@ -5,13 +5,17 @@ define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, location
 
       answered: {},
       counter: 0,
-      location: '',
-      name: '',
-      url: 'http://localhost:3000',
+      location: {},
+      collector: '',
+      url: 'https://localhost:3443/api/surveys/576410f0-eb46-11e2-a9c1-2b2cf307ced9/responses',
 
       init: function() {
-        console.log(locations.data);
         var hammertime = $("body").hammer();
+
+        // Set up the locations
+        var compiled = _.template($('#options').html());
+        var html = compiled(locations);
+        $('.location').html(html);
 
         $('.go').on('touch', app.login);
         $('.in').on('touch', app.select);
@@ -20,21 +24,23 @@ define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, location
         $('.welcome').show();
       },
 
-
       /**
        * Get the user's name and location
        */
       login: function(e) {
         e.preventDefault();
+
         var $t = $(this);
-        app.name = $t.parent().find('.name').val();
-        app.location = $t.parent().find('.location').val();
-        console.log(app.name, app.location);
+        var name;
+
+        name = $t.parent().find(":selected").val();
+        app.location = _.where(locations.locations, { name: name })[0];
+        app.collector = $t.parent().find('.name').val();
+
         $('.welcome').hide();
         $('.form').show();
         $('.footer').show();
       },
-
 
       /**
        * Select an answer
@@ -54,7 +60,6 @@ define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, location
         }
       },
 
-
       /**
        * Things that should happen when all the fields are complete
        */
@@ -67,14 +72,20 @@ define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, location
         window.setTimeout(app.reset, 100);
       },
 
+      /**
+       * Data has been submitted
+       */
       done: function() {
         $('.connection-error').hide();
         console.log("Done");
       },
 
+      /**
+       * We were unable to submit data
+       */
       fail: function(jqXHR, textStatus, error) {
         $('.connection-error').show();
-        console.log("Post failed", jqXHR, error);
+        console.log("Post failed", jqXHR, textStatus, error);
 
         // Update the counter
         app.counter -= 1;
@@ -89,20 +100,24 @@ define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, location
         var answered = _.clone(app.answered);
 
         // Prepare in the format that LocalData wants
+        // Wow, this is ugly.
         var data = {
-          collector: app.name,
-          geo_info: {
-            centroid: [],
-            humanReadableName: app.location
-          },
-          responses: answered
+          responses: [
+            {
+              collector: app.collector,
+              geo_info: {
+                centroid: app.location.location,
+                humanReadableName: app.location.name
+              },
+              responses: answered
+            }
+          ]
         };
 
         var j = $.post(app.url, data);
         j.done(app.done);
         j.fail(app.fail);
       },
-
 
       /**
        * Have all the fields been submitted?
