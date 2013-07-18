@@ -1,159 +1,75 @@
-define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, locations) {
+define([
+  'jquery.hammer',
+  'underscore',
+  'backbone',
+  'app/settings',
+  'app/models/responses',
+  'app/locations'], function($, _, Backbone, settings, Responses, locations) {
+
   $(function() {
 
     var app = {
-
-      answered: {},
-      counter: 0,
-      location: {},
-      collector: '',
-      url: 'https://localhost:3443/api/surveys/576410f0-eb46-11e2-a9c1-2b2cf307ced9/responses',
+      fields: ['direction', 'sex', 'travel'],
+      survey: '17c46670-ee39-11e2-9343-15e7a97eb5af',
 
       init: function() {
-        var hammertime = $("body").hammer();
+        settings.surveyId = app.survey;
 
-        // Set up the locations
-        var compiled = _.template($('#options').html());
-        var html = compiled(locations);
-        $('.location').html(html);
+        // Get all the responses
+        app.results = new Responses.Collection([], {
+          surveyId: app.survey
+        });
 
-        $('.go').on('touch', app.login);
-        $('.in').on('touch', app.select);
-
-        $('.loading').hide();
-        $('.welcome').show();
+        app.results.on('addSet', app.render);
       },
 
-      /**
-       * Get the user's name and location
-       */
-      login: function(e) {
-        e.preventDefault();
+      render: function() {
+        console.log("rendering", app.results);
 
-        var $t = $(this);
-        var name;
+        $('.count').html(app.results.length);
 
-        name = $t.parent().find(":selected").val();
-        app.location = _.where(locations.locations, { name: name })[0];
-        app.collector = $t.parent().find('.name').val();
-
-        $('.welcome').hide();
-        $('.form').show();
-        $('.footer').show();
+        _.each(app.fields, app.graph);
       },
 
-      /**
-       * Select an answer
-       */
-      select: function(e) {
-        e.preventDefault();
-        var $t = $(this);
-        $t.closest('.question').find('.in').removeClass('selected');
-        $t.toggleClass('selected');
+      graph: function(field) {
+        var responses = app.results.pluck('responses');
+        var counts = _.countBy(responses, function(response) {
+          return response[field];
+        });
 
-        // Set the answer
-        app.answered[$t.attr('data-question')] = $t.text();
-
-        // If we've answered everything, submit the data.
-        if(app.ready()) {
-          app.finished();
-        }
+        var answers = app.clean(counts);
+        console.log(answers);
+        var template = _.template($('#t-graph').html());
+        $('.' + field).html(template({
+          answers: answers
+        }));
       },
 
-      /**
-       * Things that should happen when all the fields are complete
-       */
-      finished: function() {
-        app.submit();
+      clean: function(counts) {
+        var keys = _.keys(counts);
+        var neat = [];
+        var total = 0;
 
-        // reset the app after a brief delay
-        // it it happens immediately, the user doesn't get enough feedback
-        // don't wait for the data to submit to reset (speed!)
-        window.setTimeout(app.reset, 100);
-      },
+        _.each(keys, function(key){
+          total += counts[key];
+        });
 
-      /**
-       * Data has been submitted
-       */
-      done: function() {
-        $('.connection-error').hide();
-        console.log("Done");
-      },
+        _.each(keys, function(key){
+          var clean = {
+            name: key,
+            count: counts[key],
+            percent: counts[key] / total * 100
+          };
 
-      /**
-       * We were unable to submit data
-       */
-      fail: function(jqXHR, textStatus, error) {
-        $('.connection-error').show();
-        console.log("Post failed", jqXHR, textStatus, error);
+          neat.push(clean);
+        });
 
-        // Update the counter
-        app.counter -= 1;
-        app.update();
-      },
-
-      /**
-       * Submit selected data
-       */
-      submit: function() {
-        // Make a clone in case the answers change before this submits.
-        var answered = _.clone(app.answered);
-
-        // Prepare in the format that LocalData wants
-        // Wow, this is ugly.
-        var data = {
-          responses: [
-            {
-              collector: app.collector,
-              geo_info: {
-                centroid: app.location.location,
-                humanReadableName: app.location.name
-              },
-              responses: answered
-            }
-          ]
-        };
-
-        var j = $.post(app.url, data);
-        j.done(app.done);
-        j.fail(app.fail);
-      },
-
-      /**
-       * Have all the fields been submitted?
-       * Returns true if all three fields are complete
-       * @return {Boolean}
-       */
-      ready: function() {
-        if (app.answered.direction && app.answered.sex && app.answered.travel) {
-          return true;
-        }
-        return false;
-      },
-
-      /**
-       * Reset the fields, visually indicate we're submitting the data.
-       */
-      reset: function() {
-        app.answered = {};
-        $('.in').removeClass('selected');
-        $('body').addClass('done').delay(500).removeClass('done');
-
-        // Update the counter
-        app.counter += 1;
-        app.update();
-      },
-
-      /**
-       * Update the counter
-       */
-      update: function() {
-        var label = (app.counter === 1) ? 'response' : 'responses';
-        $('.counter').html(app.counter + ' ' + label);
+        return neat;
       }
 
     };
 
     app.init();
   });
+
 });

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BikeCount by LocalData</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- standard viewport tag to set the viewport to the device's width
+      , Android 2.3 devices need this so 100% width works properly and
+      doesn't allow children to blow up the viewport width-->
+    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <!-- width=device-width causes the iPhone 5 to letterbox the app, so
+      we want to exclude it for iPhone 5 to allow full screen apps -->
+    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/app.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="css/add2home.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+
+    <script data-main="js/app" src="js/lib/require.js"></script>
+    <script type="application/javascript" src="js/lib/add2home.js"></script>
+
+  </head>
+  <body>
+  <div class="wrap">
+    <div class="container">
+      <div class="loading">
+        <h1>Welcome to the Detroit Bike Count.</h1>
+        <h2>We're loading the app.</h2>
+      </div>
+
+      <div class="location">
+      </div>
+
+      <div class="connection-error">
+        We weren't able to submit the results. Do you currently have cell service?
+      </div>
+
+      <div class="welcome">
+        <h1>Welcome to the Detroit Bike Count!</h1>
+        <h2>What's your name and location?</h2>
+        <input type="text" placeholder="name" class="name">
+        <select class="location">
+        </select>
+        <script type="text/template" id="options">
+          <% _.each( locations, function( location ){ %>
+          <option value="<%= location.name %>" data-location="<%= location.location %>"><%= location.name %></option>
+          <% }); %>
+        </script>
+
+        <div class="go">Go</div>
+      </div>
+
+      <div class="form">
+        <h1>Direction of travel:</h1>
+        <div class="question">
+          <div class="answer"><div class="in" data-question="direction">North</div></div>
+          <div class="answer"><div class="in" data-question="direction">South</div></div>
+          <div class="answer"><div class="in" data-question="direction">East</div></div>
+          <div class="answer"><div class="in" data-question="direction">West</div></div>
+        </div>
+
+        <div class="question">
+          <div class="answer"><div class="in" data-question="sex">Male</div></div>
+          <div class="answer"><div class="in" data-question="sex">Female</div></div>
+        </div>
+
+        <h1>The bike is moving:</h1>
+        <div class="question">
+          <div class="answer"><div class="in" data-question="travel">With traffic</div></div>
+          <div class="answer"><div class="in" data-question="travel">Against</div></div>
+          <div class="answer"><div class="in" data-question="travel">Sidewalk</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="counter">0 responses</div>
+  </div>
+  </body>
+</html>

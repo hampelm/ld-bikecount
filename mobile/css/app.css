@@ -191,28 +191,3 @@ input, select {
   background:#eee;
 }
 
-/* Graphs! */
-.graph {
-  overflow: auto;
-  display: table-cell;
-  vertical-align: bottom;
-}
-
-.answer {
-  width: 100px!important;
-  margin-right: 10px;
-  text-align: center;
-  display: inline-block;
-  vertical-align: bottom;
-}
-
-.number {
-  color: #fff;
-  padding-top:10px;
-}
-
-.bar {
-  width: 100px;
-  background: #58aeff;
-
-}
