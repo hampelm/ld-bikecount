@@ -1,4 +1,4 @@
-define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, locations) {
+define(['jquery.hammer', 'underscore', 'app/locations', 'app/api'], function($, _, locations, api) {
   $(function() {
 
     var app = {
@@ -7,10 +7,23 @@ define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, location
       counter: 0,
       location: {},
       collector: '',
-      url: '/api/surveys/17c46670-ee39-11e2-9343-15e7a97eb5af/responses',
+      url: '',
 
       init: function() {
         var hammertime = $("body").hammer();
+
+        // Get the survey from the slug
+        api.setSurveyIdFromSlug(app.setup);
+      },
+
+      setup: function(survey) {
+        if (!survey) {
+          // display an error
+          $('.not-found-error').show();
+          return;
+        }
+        app.survey = survey;
+        app.url = '/api/surveys/' + app.survey + '/responses';
 
         // Set up the locations
         var compiled = _.template($('#options').html());
@@ -120,6 +133,7 @@ define(['jquery.hammer', 'underscore', 'app/locations'], function($, _, location
         };
 
         console.log(data);
+        console.log("saving to", app.url);
         var j = $.post(app.url, data);
         j.done(app.done);
         j.fail(app.fail);

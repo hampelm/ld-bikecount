@@ -2,18 +2,23 @@ define([
   'jquery.hammer',
   'underscore',
   'backbone',
+  'app/api',
   'app/settings',
   'app/models/responses',
-  'app/locations'], function($, _, Backbone, settings, Responses, locations) {
+  'app/locations'], function($, _, Backbone, api, settings, Responses, locations) {
 
   $(function() {
 
     var app = {
       fields: ['direction', 'sex', 'travel'],
-      survey: '17c46670-ee39-11e2-9343-15e7a97eb5af',
+      survey: '',
 
       init: function() {
-        settings.surveyId = app.survey;
+        api.setSurveyIdFromSlug(app.setup);
+      },
+
+      setup: function(survey) {
+        app.survey = survey;
 
         // Get all the responses
         app.results = new Responses.Collection([], {

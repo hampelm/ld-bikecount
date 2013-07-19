@@ -8,6 +8,25 @@
       to { opacity: 1; }
 }
 
+@import url("http://fast.fonts.net/lt/1.css?apiType=css&c=9a6feb00-f8b3-48aa-b165-798ef59ba4f6&fontids=673817,673808");
+@font-face{
+font-family:"Neuzeit Office W01 Bold";
+src:url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/bold/bold.eot?#iefix");
+src:url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/bold/bold.eot?#iefix") format("eot"),
+    url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/bold/bold.woff") format("woff"),
+    url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/bold/bold.ttf") format("truetype"),
+    url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/bold/bold.svg#85050462-ab1f-4478-a289-36eed1d3c53f") format("svg");
+}
+
+@font-face{
+font-family:"NeuzeitOfficeW01-Regular";
+src:url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/regular/regular.eot?#iefix");
+src:url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/regular/regular.eot?#iefix") format("eot"),
+    url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/regular/regular.woff") format("woff"),
+    url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/regular/regular.ttf") format("truetype"),
+    url("https://s3.amazonaws.com/localdata-static/fonts/neuzeit/regular/regular.svg#d4cb246e-742d-4269-9f6a-901a050ff03f") format("svg");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,9 +37,12 @@ html, body {
 }
 
 body {
-  font-family: Open Sans;
+  font-family: NeuzeitOfficeW01-Regular, Open Sans, Helvetica, sans-serif;
   font-weight: 300;
-  background: #fff;
+  font-size: 16px;
+  background: #fcf5f0;
+  color: #6e6663;
+
 }
 
 body.done {
@@ -43,10 +65,9 @@ select option {
 input,
 select,
 select option {
-  font-family: Open Sans;
+  font-family: NeuzeitOfficeW01-Regular, Open Sans, Helvetica, sans-serif;
   font-size:30px;
-  border:0px solid #fff;
-  border-bottom: 1px dotted #666;
+  border: 5px solid #58aeff;
 }
 
 input, select {
@@ -56,7 +77,7 @@ input, select {
 
 .name {
   margin-top:15px;
-  color: #00949b;
+  color: #58aeff;
 }
 
 .wrap {
@@ -67,9 +88,8 @@ input, select {
   padding:15px 75px 15px 75px;
   color: #fff;
   font-size: 20px;
-  background: #39abb7;
+  background: #58aeff;
   display: inline-block;
-  border-radius: 5px;
   cursor: pointer;
   text-align: center;
 }
@@ -82,14 +102,14 @@ input, select {
 
 .loading,
 .welcome,
-.connection-error,
+.error,
 .form,
 .footer {
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
 }
 
-.connection-error,
+.error,
 .welcome,
 .form,
 .footer {
@@ -113,28 +133,24 @@ input, select {
 }
 
 .question .answer .in {
-  padding: 30px 20px;
-  border: 1px solid #ccc;
+  line-height: 70px;
+  border: 5px solid #b7aba5;
   border-left: 0;
-  background: #eee;
+  background: #fff;
 }
 
 .question .answer:first-child .in {
-  border-left: 1px solid #ccc;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-left: 5px solid #b7aba5;
 }
 
 .question .answer:last-child .in {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 .question .answer .in.selected {
-  background: #39abb7;
+  background: #8bc7ff;
   color: #fff;
-  border-color: #00949b;
-  border-left: 1px solid #00949b;
+  border-color: #58aeff;
+  border-left: 5px solid #58aeff;
 }
 
 
@@ -168,7 +184,7 @@ input, select {
     width: 25%;
 }
 
-.connection-error {
+.error {
   line-height: 25px;
   background: #fcffc6;
   padding: 20px;
