@@ -20,12 +20,23 @@ define([
       setup: function(survey) {
         app.survey = survey;
 
+        // Set up download/mobile links
+        app.links();
+
         // Get all the responses
         app.results = new Responses.Collection([], {
           surveyId: app.survey
         });
 
         app.results.on('addSet', app.render);
+      },
+
+      links: function() {
+        var slug = window.location.hash.slice(1);
+        $('.mobile').attr('href', 'mobile/#' + slug);
+
+        var download = '/api/surveys/' + app.survey + '/responses.csv';
+        $('.download').attr('href', download);
       },
 
       render: function() {

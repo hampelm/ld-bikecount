@@ -117,7 +117,10 @@ define(['jquery.hammer', 'underscore', 'app/locations', 'app/api'], function($, 
         var data = {
           responses: [
             {
-              collector: app.collector,
+              source: {
+                collector: app.collector,
+                type: 'bikeapp'
+              },
               object_id: app.location.name,
               geo_info: {
                 geometry: {
