@@ -42,16 +42,26 @@ body {
   font-size: 16px;
   background: #fcf5f0;
   color: #6e6663;
+  border-top: 5px solid #fcf5f0;
 
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  transition: all .3s ease-in;
+}
+
+body.success {
+  background-color: #fff;
+  border-top: 5px solid #58aeff;
+
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  transition: all .3s ease-in;
 }
 
 body.done {
   background: red;
-}
-
-body,
-.done {
-  transition: background 5s ease;
 }
 
 h1,
@@ -74,6 +84,7 @@ input, select {
   display:block;
   margin-bottom:10px;
 }
+
 
 .name {
   margin-top:15px;
@@ -133,10 +144,12 @@ input, select {
 }
 
 .question .answer .in {
+  font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
   line-height: 75px;
   border: 5px solid #b7aba5;
   border-left: 0;
-  background: #fff;
+  background: #b7aba5;
+  color: #fff;
 }
 
 .question .answer:first-child .in {
@@ -200,10 +213,9 @@ input, select {
 .footer {
   display: none;
   position: relative;
-  margin-top: -75px; /* negative value of footer height */
+  margin-top: -65px; /* negative value of footer height */
   height: 50px;
   clear: both;
   text-align: center;
-  background:#eee;
 }
 

@@ -17,7 +17,14 @@ define([
         api.setSurveyIdFromSlug(app.setup);
       },
 
-      setup: function(survey) {
+      setup: function(survey, error) {
+        if(error) {
+          $('.intro').hide();
+          $('.tools').hide();
+          $('.error').show();
+          return;
+        }
+
         app.survey = survey;
 
         // Set up download/mobile links

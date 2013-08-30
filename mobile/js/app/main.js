@@ -1,4 +1,4 @@
-define(['jquery.hammer', 'underscore', 'app/locations', 'app/api'], function($, _, locations, api) {
+define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/api'], function($, _, jqc, locations, api) {
   $(function() {
 
     var app = {
@@ -25,6 +25,11 @@ define(['jquery.hammer', 'underscore', 'app/locations', 'app/api'], function($, 
         app.survey = survey;
         app.url = '/api/surveys/' + app.survey + '/responses';
 
+        // Set the collector name, if we already know it.
+        if ($.cookie('collectorName') !== null){
+          $('.name').val($.cookie('collectorName'));
+        }
+
         // Set up the locations
         var compiled = _.template($('#options').html());
         var html = compiled(locations);
@@ -49,6 +54,7 @@ define(['jquery.hammer', 'underscore', 'app/locations', 'app/api'], function($, 
         name = $t.parent().find(":selected").val();
         app.location = _.where(locations.locations, { name: name })[0];
         app.collector = $t.parent().find('.name').val();
+        $.cookie('collectorName', app.collector, { path: '/' });
 
         $('.welcome').hide();
         $('.form').show();
@@ -160,7 +166,10 @@ define(['jquery.hammer', 'underscore', 'app/locations', 'app/api'], function($, 
       reset: function() {
         app.answered = {};
         $('.in').removeClass('selected');
-        $('body').addClass('done').delay(500).removeClass('done');
+        $('body').addClass('success').delay(300).queue(function(next){
+            $(this).removeClass("success");
+            next();
+        });
 
         // Update the counter
         app.counter += 1;

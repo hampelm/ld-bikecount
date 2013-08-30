@@ -32,12 +32,15 @@ define(function (require) {
       return callback();
     }
 
-    // TODO: Display a nice error if the survey wans't found.
-    $.getJSON(url, function(data) {
+    var jqxhr = $.getJSON(url)
+    .done(function(data) {
       console.log("Survey Id: " + data.survey);
       settings.slug = slug;
       settings.surveyId = data.survey;
       callback(data.survey);
+    })
+    .fail(function(error){
+      callback(null, error);
     });
   };
 
