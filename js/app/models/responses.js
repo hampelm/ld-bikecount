@@ -175,8 +175,9 @@ function($, _, Backbone, moment, settings, api) {
     },
 
     // Filter the items in the collection
-    setFilter: function (question, answer) {
+    setFilter: function (question, answer, checkResponses) {
       console.log("Filtering the responses", question, answer);
+      if (checkResponses === undefined) checkResponses = True;
 
       // Make a shallow clone of the unfiltered models array.
       //
@@ -199,8 +200,11 @@ function($, _, Backbone, moment, settings, api) {
 
       // Select the correct responses
       this.reset(this.filter(function (item) {
-        var resps = item.get('responses');
-        return resps !== undefined && (resps[question] === answer);
+        if(checkResponses) {
+          var resps = item.get('responses');
+          return resps !== undefined && (resps[question] === answer);
+        }
+        return item[question] === answer;
       }));
     },
 

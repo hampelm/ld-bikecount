@@ -32,6 +32,13 @@
           <a href="" class="box mobile">Collect data</a>
         </div>
 
+        <div class="filter">
+          <h2>Filter by date:</h2>
+          <select>
+            <option>All dates</option>
+          </select>
+        </div>
+
         <h2>Direction of travel</h2>
         <div class="direction graph"></div>
 
@@ -51,6 +58,12 @@
     <script type="text/template" id="t-collector">
       <% _.each( collectors, function( collector ){ %>
         <li><%= collector.name %> (<%= collector.count %>)</li>
+      <% }); %>
+    </script>
+
+    <script type="text/template" id="t-filter">
+      <% _.each( dates, function( list, date ){ %>
+        <option><%= date %> (<%= list.length %>)</option>
       <% }); %>
     </script>
 

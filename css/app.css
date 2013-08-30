@@ -73,6 +73,7 @@ h2 {
   border-top: 5px solid #fff;
 }
 
+
 input,
 select,
 select option {
@@ -133,6 +134,7 @@ input, select {
 .count {
   color: #f15a24;
   font-size: 120px;
+  line-height: 100px;
   display: block;
 }
 
@@ -194,5 +196,9 @@ input, select {
   line-height: 62px;
   letter-spacing: -1px;
   padding: 0px 20px;
+}
+
+.tools {
+  margin-top: 1em;
 }
 

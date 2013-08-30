@@ -52,6 +52,19 @@ define([
         $('.count').html(app.results.length);
 
         _.each(app.fields, app.graph);
+        app.bin();
+      },
+
+      bin: function() {
+        var dates = app.results.groupBy(function(model) {
+          var created = new Date(model.get('created'));
+          return created.toDateString();
+        });
+        console.log(dates);
+        var template = _.template($('#t-filter').html());
+        $('.filter select').append(template({
+          dates: dates
+        }));
       },
 
       graph: function(field) {
