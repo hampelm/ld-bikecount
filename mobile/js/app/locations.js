@@ -4,41 +4,69 @@ define(function (require) {
   return {
     locations: [
       {
-        'name': 'Midtown: Cass at Canfield',
-        'location': [-83.064123,42.35157]
+        'name': '8 Mile Road at Dequindre',
+        'location': [-82.994879,42.351398]
       },
       {
-        'name': 'Villages: E. Jefferson area',
-        'location': [-82.991195,42.353816]
+        'name': 'Cass at Canfield',
+        'location': [-83.064123,42.35157]
       },
+      // {
+      //   'name': 'E. Jefferson at Iroquois',
+      //   'location': [-82.991195,42.353816]
+      // },
       {
         'name': 'Dequindre Cut at Atwater',
         'location': [-83.026545,42.333272]
       },
       {
-        'name': 'Corktown: Michigan Ave at 14th',
+        'name': 'Gratiot at Conner Creek Greenway',
+        'location': [-82.997493,42.404896]
+      },
+      {
+        'name': 'E. Jefferson at Van Dyke',
+        location: [-82.994879,42.351398]
+      },
+      {
+        'name': 'Jos Campau at Holbrook',
         'location': [-83.076427,42.331371]
+      },
+      {
+        'name': 'Livernois at Joy',
+        'location': [-82.994879,42.351398]
+      },
+      {
+        'name': 'Livernois at McNichols',
+        'location': [-82.994879,42.351398]
+      },
+      {
+        'name': 'Mack at Gratiot',
+        'location': [-82.994879,42.351398]
+      },
+      {
+        'name': 'Michigan Ave at 14th',
+        'location': [-83.076427,42.331371]
+      },
+      {
+        'name': 'W. Outer Drive at Grand River',
+        'location': [-82.994879,42.351398]
+      },
+      {
+        'name': 'Van Dyke at Outer Drive',
+        'location': [-82.994879,42.351398]
+      },
+      {
+        'name': 'W. Vernor at Springwells',
+        'location': [-83.127217,42.311427]
+      },
+      {
+        'name': 'Vernor at Clark',
+        'location': [-82.994879,42.351398]
       },
       {
         'name': 'Woodward north of McNichols',
         'location': [-83.076427,42.331371]
-      },
-      {
-        'name': 'Hamtramck: Jos Campau at Holbrook',
-        'location': [-83.076427,42.331371]
-      },
-      {
-        'name': 'Eastside: Gratiot at Conner Creek Greenway',
-        'location': [-82.997493,42.404896]
-      },
-      {
-        'name': 'Rosedale-Grandmont: W. Outer Drive at Grand River',
-        'location': [-83.232439,42.406407]
-      },
-      {
-        'name': 'SW Detroit: W. Vernor at Springwells',
-        'location': [-83.127217,42.311427]
-      },
+      }
     ]
   };
 

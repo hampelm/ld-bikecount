@@ -42,7 +42,7 @@ body {
   font-size: 16px;
   background: #fcf5f0;
   color: #6e6663;
-  border-top: 5px solid #fcf5f0;
+  border-top: 8px solid #fcf5f0;
 
   -moz-transition: all .3s ease-in;
   -webkit-transition: all .3s ease-in;
@@ -52,7 +52,7 @@ body {
 
 body.success {
   background-color: #fff;
-  border-top: 5px solid #58aeff;
+  border-top: 8px solid #58aeff;
 
   -moz-transition: all .3s ease-in;
   -webkit-transition: all .3s ease-in;
@@ -78,6 +78,11 @@ select option {
   font-family: NeuzeitOfficeW01-Regular, Open Sans, Helvetica, sans-serif;
   font-size:30px;
   border: 5px solid #58aeff;
+}
+
+select,
+select option {
+  font-size: 16px;
 }
 
 input, select {
@@ -206,14 +211,14 @@ input, select {
 }
 
 .counter {
-  line-height: 50px;
+  line-height: 40px;
   font-size:25px;
 }
 
 .footer {
   display: none;
   position: relative;
-  margin-top: -65px; /* negative value of footer height */
+  margin-top: -85px; /* negative value of footer height */
   height: 50px;
   clear: both;
   text-align: center;
