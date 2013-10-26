@@ -2,10 +2,11 @@ define([
   'jquery.hammer',
   'underscore',
   'backbone',
+  'leaflet/leaflet',
   'app/api',
   'app/settings',
   'app/models/responses',
-  'app/locations'], function($, _, Backbone, api, settings, Responses, locations) {
+  'app/locations'], function($, _, Backbone, L, api, settings, Responses, locations) {
 
   $(function() {
 
@@ -36,6 +37,13 @@ define([
         });
 
         app.results.on('addSet', app.render);
+
+        // Create the map
+        var map = L.map('map').setView([51.505, -0.09], 13);
+        app.map = map;
+
+        // add an OpenStreetMap tile layer
+        L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-n9bps30s/{z}/{x}/{y}.png').addTo(map);
       },
 
       links: function() {
@@ -52,10 +60,13 @@ define([
         $('.count').html(app.results.length);
 
         _.each(app.fields, app.graph);
-        app.bin();
+        app.binDates();
+        app.mapLocations();
+
       },
 
-      bin: function() {
+      // Bin responses by date
+      binDates: function() {
         var dates = app.results.groupBy(function(model) {
           var created = new Date(model.get('created'));
           return created.toDateString();
@@ -65,6 +76,17 @@ define([
         $('.filter select').append(template({
           dates: dates
         }));
+      },
+
+      mapLocations: function(response) {
+        app.results.each(function(model) {
+          console.log(model.get('geo_info').centroid);
+          console.log(model.get('geo_info').humanReadableName);
+        });
+        var locations = app.results.groupBy(function(model){
+          return model.get('geo_info').centroid;
+        });
+        console.log("locations", locations);
       },
 
       graph: function(field) {
