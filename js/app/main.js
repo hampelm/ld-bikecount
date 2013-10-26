@@ -79,14 +79,27 @@ define([
       },
 
       mapLocations: function(response) {
-        app.results.each(function(model) {
-          console.log(model.get('geo_info').centroid);
-          console.log(model.get('geo_info').humanReadableName);
+        var resultLocations = app.results.groupBy(function(model){
+          return model.get('geo_info').humanReadableName;
         });
-        var locations = app.results.groupBy(function(model){
-          return model.get('geo_info').centroid;
+
+        var group = new L.featureGroup().addTo(app.map);
+        _.each(resultLocations, function(list, location) {
+          var latlng = _.where(locations.locations, { name: location})[0].location;
+          latlng.reverse();
+          console.log(location, latlng);
+
+          console.log(latlng);
+          var options = {
+            'color': '#f15a24',
+            'fillColor': '#f15a24',
+            'radius': list.length
+          };
+          var marker = new L.CircleMarker(latlng, options);
+          group.addLayer(marker);
         });
-        console.log("locations", locations);
+        app.map.fitBounds(group.getBounds());
+
       },
 
       graph: function(field) {

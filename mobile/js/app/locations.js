@@ -18,10 +18,12 @@ define(function (require) {
       {
         'name': 'Dequindre Cut at Atwater',
         'location': [-83.026546,42.333198]
+        ,
       },
       {
         'name': 'Gratiot at Conner Creek Greenway',
-        'location': [-82.997493,42.404896]
+        'location': [-82.99749,42.404925]
+        ,
       },
       {
         'name': 'E. Jefferson at Van Dyke',
@@ -57,16 +59,15 @@ define(function (require) {
       },
       {
         'name': 'W. Vernor at Springwells',
-        'location': [-83.105206,42.417754]
-        ,
+        'location': [-83.064123,42.35157]
       },
       {
         'name': 'Vernor at Clark',
-        'location': [-83.105206,42.417754]
+        'location': [-83.064123,42.35157]
       },
       {
         'name': 'Woodward north of McNichols',
-        'location': [-83.105206,42.417754]
+        'location': [42.418217,-83.105361]
       }
     ]
   };

@@ -54,7 +54,6 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         name = $t.parent().find(":selected").val();
         app.location = _.where(locations.locations, { name: name })[0];
         app.collector = $t.parent().find('.name').val();
-        console.log(_.where(locations.locations, { name: name }));
         $.cookie('collectorName', app.collector, { path: '/' });
         $('.welcome').hide();
         $('.form').show();
