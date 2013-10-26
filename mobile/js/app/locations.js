@@ -5,7 +5,7 @@ define(function (require) {
     locations: [
       {
         'name': '8 Mile Road at Dequindre',
-        'location': [-83.064123,42.35157]
+        'location': [-83.105361,42.418217xxx]
       },
       {
         'name': 'Cass at Canfield',
@@ -59,11 +59,14 @@ define(function (require) {
       },
       {
         'name': 'W. Vernor at Springwells',
-        'location': [-83.064123,42.35157]
+        'location': [-83.105206,42.417754]
+        42.35157,-83.064123
+        ,
       },
       {
         'name': 'Vernor at Clark',
-        'location': [-83.064123,42.35157]
+        'location': [-83.105206,42.35157]
+        ,-83.064123
       },
       {
         'name': 'Woodward north of McNichols',
