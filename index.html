@@ -33,10 +33,6 @@
         </div>
 
         <div class="filter">
-          <h2>Filter by date:</h2>
-          <select>
-            <option>All dates</option>
-          </select>
         </div>
 
         <div id="map"></div>
@@ -64,9 +60,13 @@
     </script>
 
     <script type="text/template" id="t-filter">
-      <% _.each( dates, function( list, date ){ %>
-        <option><%= date %> (<%= list.length %>)</option>
-      <% }); %>
+      <h2>Filter by date: <button class="box mini reset">clear filter</button></h2>
+      <select>
+        <option value="all">All dates</option>
+        <% _.each( dates, function( list, date ){ %>
+          <option value="<%= date %>"><%= date %> (<%= list.length %>)</option>
+        <% }); %>
+      </select>
     </script>
 
     <script type="text/template" id="t-graph">

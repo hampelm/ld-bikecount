@@ -45,7 +45,6 @@ define(function (require) {
       },
       {
         'name': 'Michigan Ave at 14th',
-
         'location': [-83.076427,42.331371]
       },
       {

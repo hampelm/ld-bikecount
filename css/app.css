@@ -200,7 +200,19 @@ input, select {
   padding: 0px 20px;
 }
 
+.mini {
+  font-size: 16px;
+  border-width: 4px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin-bottom: 1em;
+}
+
 .tools {
   margin-top: 1em;
+}
+
+.reset {
+  display: none;
 }
 

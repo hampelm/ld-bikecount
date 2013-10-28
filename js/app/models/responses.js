@@ -174,11 +174,7 @@ function($, _, Backbone, moment, settings, api) {
       return breakdown;
     },
 
-    // Filter the items in the collection
-    setFilter: function (question, answer, checkResponses) {
-      console.log("Filtering the responses", question, answer);
-      if (checkResponses === undefined) checkResponses = True;
-
+    backup: function() {
       // Make a shallow clone of the unfiltered models array.
       //
       // TODO: if someone calls reset or update, we need to toss out the
@@ -187,6 +183,27 @@ function($, _, Backbone, moment, settings, api) {
       if (this.unfilteredModels === null) {
         this.unfilteredModels = _.clone(this.models);
       }
+    },
+
+    dateFilter: function(date) {
+      this.backup();
+
+      date.setHours(0,0,0,0);
+
+      this.reset(this.filter(function (item){
+        var created = new Date(item.get('created'));
+        created.setHours(0,0,0,0);
+        // console.log(date.getTime() === created.getTime(), date, created);
+        return date.getTime() === created.getTime();
+      }));
+    },
+
+    // Filter the items in the collection
+    setFilter: function (question, answer, checkResponses) {
+      console.log("Filtering the responses", question, answer);
+      if (checkResponses === undefined) checkResponses = True;
+
+      this.backup();
 
       // Record the filter for future use
       this.filters = {

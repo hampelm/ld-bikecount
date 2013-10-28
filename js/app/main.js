@@ -37,6 +37,7 @@ define([
         });
 
         app.results.on('addSet', app.render);
+        app.results.on('reset', app.render);
 
         // Create the map
         var map = L.map('map').setView([51.505, -0.09], 13);
@@ -62,7 +63,6 @@ define([
         _.each(app.fields, app.graph);
         app.binDates();
         app.mapLocations();
-
       },
 
       // Bin responses by date
@@ -71,11 +71,24 @@ define([
           var created = new Date(model.get('created'));
           return created.toDateString();
         });
-        console.log(dates);
         var template = _.template($('#t-filter').html());
-        $('.filter select').append(template({
+        $('.filter').html(template({
           dates: dates
         }));
+
+        // Handle filtering by date
+        $('.filter select').change(function(event){
+          var value = $(event.target).val();
+          var date =  new Date(value);
+          app.results.dateFilter(date);
+
+          $('.reset').show();
+          $('.reset').click(this.reset);
+        }.bind(this));
+      },
+
+      reset: function() {
+        app.results.clearFilter();
       },
 
       mapLocations: function(response) {
@@ -83,13 +96,15 @@ define([
           return model.get('geo_info').humanReadableName;
         });
 
+        if (app.group) {
+          app.group.clearLayers();
+        }
+
         var group = new L.featureGroup().addTo(app.map);
+        app.group = group;
         _.each(resultLocations, function(list, location) {
           var latlng = _.where(locations.locations, { name: location})[0].location;
-          latlng.reverse();
-          console.log(location, latlng);
-
-          console.log(latlng);
+          latlng = _.clone(latlng).reverse();
           var options = {
             'color': '#f15a24',
             'fillColor': '#f15a24',
@@ -109,7 +124,6 @@ define([
         });
 
         var answers = app.clean(counts);
-        console.log(answers);
         var template = _.template($('#t-graph').html());
         $('.' + field).html(template({
           answers: answers
