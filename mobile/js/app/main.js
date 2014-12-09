@@ -140,9 +140,19 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
           ]
         };
 
-        console.log(data);
+        console.log("saving data", data);
         console.log("saving to", app.url);
-        var j = $.post(app.url, data);
+        // var j = $.post(app.url, data);
+        var j = $.ajax({
+          url: api.getSurveyURL() + '/responses',
+          type: 'POST',
+          data: JSON.stringify(data), // JSON.stringify({ responses: [response] }),
+          headers: {
+            pragma: 'no-cache'
+          },
+          contentType: 'application/json; charset=utf-8'
+        });
+
         j.done(app.done);
         j.fail(app.fail);
       },
