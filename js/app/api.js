@@ -13,7 +13,7 @@ define(function (require) {
   // Return the current hostname.
   // TODO: Should be in util
   api.getBaseURL = function() {
-    if (window.location.protocol != "https:") {
+    if (window.location.protocol !== "https:") {
       return "https://" + window.location.host;
     }
 
@@ -43,7 +43,6 @@ define(function (require) {
       callback(null, error);
     });
   };
-
 
   // Generates the URL for the current survey
   // (Current survey is set by setSurveyIdFromSlug, above)

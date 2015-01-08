@@ -1,3 +1,6 @@
+/*jslint nomen: true */
+/*globals define: true */
+
 define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/api'], function($, _, jqc, locations, api) {
   $(function() {
 
@@ -13,30 +16,37 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         var hammertime = $("body").hammer();
 
         // Get the survey from the slug
-        api.setSurveyIdFromSlug(app.setup);
+        api.getSurveyFromSlug(app.setup);
       },
 
       setup: function(survey) {
+        console.log("Using survey", survey);
+
+        var compiled, html;
+
         if (!survey) {
-          // display an error
           $('.not-found-error').show();
           return;
         }
         app.survey = survey;
-        app.url = '/api/surveys/' + app.survey + '/responses';
+        app.url = '/api/surveys/' + survey.id + '/responses';
 
         // Set the collector name, if we already know it.
         if ($.cookie('collectorName') !== null){
           $('.name').val($.cookie('collectorName'));
         }
 
+        // Set up the welcome screen
+        compiled = _.template($('#welcome-template').html());
+        html = compiled(survey);
+        $('.welcome').html(html);
+
         // Set up the locations
-        var compiled = _.template($('#options').html());
-        var html = compiled(locations);
+        compiled = _.template($('#options-template').html());
+        html = compiled(locations);
         $('.location').html(html);
 
         $('.go').on('touch', app.login);
-        $('.in').on('touch', app.select);
 
         $('.loading').hide();
         $('.welcome').show();
@@ -58,24 +68,40 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         $('.welcome').hide();
         $('.form').show();
         $('.footer').show();
+
+        api.getForm(app.form);
       },
 
-      /**
-       * Select an answer
-       */
-      select: function(e) {
+      form: function(data) {
+        console.log("Setting up form", data);
+        var compiled, html;
+        compiled = _.template($('#form-template').html());
+        html = compiled(data);
+        $('.form').html(html);
+
+        // Listen for taps on the responses.
+        $('.question').on('touch', app.add);
+        $('.finished').on('touch', app.finished);
+        $('.finished').on('touch', function() {console.log("Hey");});
+      },
+
+      add: function(e) {
         e.preventDefault();
         var $t = $(this);
-        $t.closest('.question').find('.in').removeClass('selected');
-        $t.toggleClass('selected');
+        var question = $t.attr('data-question');
 
-        // Set the answer
-        app.answered[$t.attr('data-question')] = $t.text();
-
-        // If we've answered everything, submit the data.
-        if(app.ready()) {
-          app.finished();
+        if( _.has(app.answered, question)) {
+          app.answered[question] += 1;
+        } else {
+          app.answered[question] = 1;
         }
+
+        app.update(question);
+      },
+
+      update: function(question) {
+        var count = app.answered[question];
+        $(".count[data-question='" + question + "']").html(count);
       },
 
       /**
@@ -183,16 +209,7 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         // Update the counter
         app.counter += 1;
         app.update();
-      },
-
-      /**
-       * Update the counter
-       */
-      update: function() {
-        var label = (app.counter === 1) ? 'response' : 'responses';
-        $('.counter').html(app.counter + ' ' + label);
       }
-
     };
 
     app.init();

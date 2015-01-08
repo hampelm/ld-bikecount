@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BikeCount by LocalData</title>
+    <title>LocalData Counts</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- standard viewport tag to set the viewport to the device's width
@@ -24,13 +24,10 @@
   <div class="wrap">
     <div class="container">
       <div class="loading">
-        <h1>Welcome to the Detroit Bike Count.</h1>
+        <h1>Welcome to LocalData Count.</h1>
         <h2>We're loading the app.</h2>
       </div>
 
-<!--       <div class="location">
-      </div>
- -->
       <div class="not-found-error error">
         We weren't able to find the survey. Do you have the right URL?
       </div>
@@ -40,47 +37,49 @@
       </div>
 
       <div class="welcome">
-        <h1>Welcome to the Detroit Bike Count!</h1>
-        <h2>What's your name and location?</h2>
-        <input type="text" placeholder="name" class="name">
-        <select class="location">
-        </select>
-        <script type="text/template" id="options">
-          <% _.each( locations, function( location ){ %>
-          <option value="<%= location.name %>" data-location="<%= location.location %>"><%= location.name %></option>
-          <% }); %>
-        </script>
-
-        <div class="go">Go</div>
       </div>
 
       <div class="form">
-        <h1>Direction of travel:</h1>
-        <div class="question">
-          <div class="answer"><div class="in" data-question="direction">North</div></div>
-          <div class="answer"><div class="in" data-question="direction">South</div></div>
-          <div class="answer"><div class="in" data-question="direction">East</div></div>
-          <div class="answer"><div class="in" data-question="direction">West</div></div>
-        </div>
-
-        <div class="question">
-          <div class="answer"><div class="in" data-question="sex">Male</div></div>
-          <div class="answer"><div class="in" data-question="sex">Female</div></div>
-          <div class="answer"><div class="in" data-question="sex">Unknown</div></div>
-        </div>
-
-        <h1>The bike is moving:</h1>
-        <div class="question">
-          <div class="answer"><div class="in" data-question="travel">With traffic</div></div>
-          <div class="answer"><div class="in" data-question="travel">Against</div></div>
-          <div class="answer"><div class="in" data-question="travel">Sidewalk</div></div>
-        </div>
       </div>
     </div>
   </div>
 
+  <!--
   <div class="footer">
     <div class="counter">0 responses</div>
   </div>
+  -->
+
+  <script type="text/template" id="welcome-template">
+    <h1><%= name %></h1>
+    <h2>What's your name and location?</h2>
+    <input type="text" placeholder="name" class="name">
+    <select class="location">
+    </select>
+
+    <div class="go">Go</div>
+  </script>
+
+  <script type="text/template" id="options-template">
+    <% _.each( locations, function( location ){ %>
+    <option value="<%= location.name %>" data-location="<%= location.location %>"><%= location.name %></option>
+    <% }); %>
+  </script>
+
+  <script type="text/template" id="form-template">
+    <div style="overflow:auto">
+    <% _.each(questions, function(question) { %>
+      <div class="out">
+        <div class="question" data-question="<%= question.name %>">
+        <%= question.text %>
+        </div>
+        <div class="count" data-question="<%= question.name %>">0</div>
+      </div>
+    <% }); %>
+    </div>
+
+    <div class="finished">Submit</div>
+  </script>
+
   </body>
 </html>

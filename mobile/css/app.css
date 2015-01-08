@@ -111,7 +111,7 @@ input, select {
 }
 
 .container {
-  margin: 20px 20px 0 20px;
+  margin: 10px 10px 0 20px;
   overflow: auto;
   padding-bottom: 50px;
 }
@@ -136,35 +136,43 @@ input, select {
   font-size:18px;
 }
 
-.question {
-  margin-bottom: 30px;
-  overflow: auto;
+.out {
+  margin: 10px 4% 10px 0;
   text-align: center;
-}
-
-.question .answer {
   display: inline-block;
   float: left;
   cursor: pointer;
+  position: relative;
+  width: 46%;
 }
 
-.question .answer .in {
+.question {
   font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
-  line-height: 75px;
   border: 5px solid #b7aba5;
   border-left: 0;
   background: #b7aba5;
   color: #fff;
+  min-height: 75px;
 }
 
-.question .answer:first-child .in {
+.count {
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  border-radius: 20px;
+  background: #6e6663;
+  color: #ffe;
+  padding: 3px 8px;
+}
+
+.question:first-child .in {
   border-left: 5px solid #b7aba5;
 }
 
-.question .answer:last-child .in {
+.question:last-child .in {
 }
 
-.question .answer .in.selected {
+.question.selected {
   background: #8bc7ff;
   color: #fff;
   border-color: #58aeff;
@@ -172,34 +180,10 @@ input, select {
 }
 
 
-.question .answer .in,
-.question .answer .in.selected {
+.question,
+.question.selected {
   transition : background 0.07s ease;
   transition : color 0.07s ease-out;
-}
-
-
-/* one item */
-.answer:first-child:nth-last-child(1) {
-    width: 100%;
-}
-
-/* two items */
-.answer:first-child:nth-last-child(2),
-.answer:first-child:nth-last-child(2) ~ .answer {
-    width: 50%;
-}
-
-/* three items */
-.answer:first-child:nth-last-child(3),
-.answer:first-child:nth-last-child(3) ~ .answer {
-    width: 33.3333%;
-}
-
-/* four items */
-.answer:first-child:nth-last-child(4),
-.answer:first-child:nth-last-child(4) ~ .answer {
-    width: 25%;
 }
 
 .error {
@@ -215,6 +199,12 @@ input, select {
   font-size:25px;
 }
 
+.finished {
+  width: 100%;
+  background: #58aeff;
+  cursor: pointer;
+}
+
 .footer {
   display: none;
   position: relative;
@@ -223,4 +213,5 @@ input, select {
   clear: both;
   text-align: center;
 }
+
 

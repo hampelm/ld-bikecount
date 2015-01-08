@@ -11,15 +11,13 @@ define(function (require) {
   var api = {};
 
   // Return the current hostname.
-  // TODO: Should be in util
   api.getBaseURL = function() {
-    if (window.location.protocol != "https:") {
+    if (window.location.protocol !== "https:") {
       return "https://" + window.location.host;
     }
 
     return "http://" + window.location.host;
   };
-
 
   // Find a survey by slug
   // Given a slug (eg 'just-a-surey') Sets settings.surveyId
@@ -42,6 +40,40 @@ define(function (require) {
     });
   };
 
+  // Get a survey by ID
+  api.getSurvey = function(id, callback) {
+    var url = settings.api.baseurl +  "/surveys/" + id;
+
+    var jqxhr = $.getJSON(url)
+    .done(function(data) {
+      callback(data.survey);
+    })
+    .fail(function(error){
+      callback(null, error);
+    });
+  };
+
+  api.getSurveyFromSlug = function(callback) {
+    api.setSurveyIdFromSlug(function(id) {
+      console.log("Got stuff", api, id);
+      api.getSurvey(id, callback);
+    }.bind(this));
+  };
+
+  // Get the form
+  api.getForm = function(callback) {
+    console.log('Getting form data');
+    var url = api.getSurveyURL() + '/forms';
+
+    var jqxhr = $.getJSON(url)
+    .done(function(data) {
+      settings.formData = data.forms[0];
+      callback(settings.formData);
+    })
+    .fail(function(error){
+      callback(null, error);
+    });
+  };
 
   // Generates the URL for the current survey
   // (Current survey is set by setSurveyIdFromSlug, above)
