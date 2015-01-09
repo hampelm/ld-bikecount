@@ -49,7 +49,7 @@
 
   <div class="footer">
     <div class="finished">Done - submit results</div>
-    <p><span class="survey-name"></span> <a href="#" class="change-location">Change location</a></p>
+    <p><span class="survey-name"></span> <span class="survey-location"></span> <a href="#" class="change-location">Change location</a></p>
   </div>
 
 
@@ -77,8 +77,8 @@
         <div class="question" data-question="<%= question.name %>">
           <div class="question-text"><%= question.text %></div>
         </div>
-        <div class="count" data-question="<%= question.name %>">0</div>
         <div class="subtract" data-question="<%= question.name %>">-1</div>
+        <div class="count zero" data-question="<%= question.name %>">0</div>
       </div>
     <% }); %>
     </div>

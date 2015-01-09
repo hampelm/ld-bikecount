@@ -51,7 +51,7 @@ body {
 }
 
 body.success {
-  background-color: #fff;
+  background-color: #58aeff;
   border-top: 8px solid #58aeff;
 
   -moz-transition: all .3s ease-in;
@@ -149,11 +149,15 @@ input, select {
 
 .question {
   font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
-  border: 5px solid #58aeff;
-  border-left: 0;
   background: #58aeff;
   color: #fff;
-  min-height: 75px;
+  min-height: 83px;
+  border-radius: 4px;
+}
+
+.question.tapped {
+  color: #58aeff;
+  background: #fff;
 }
 
 .question-text {
@@ -172,18 +176,27 @@ input, select {
   padding: 3px 8px;
 }
 
+.count.zero {
+  background: #fff;
+  color: #6e6663;
+}
+
 .subtract {
   font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
   position: absolute;
   left: 0;
   bottom: 0;
-  background: #f15a24;
-  color: #ffe;
+  color: #f15a24;
+  background: #fff;
   height: 40px;
   width: 40px;
   line-height: 40px;
 }
 
+.subtract.tapped {
+  background: #f15a24;
+  color: #fff;
+}
 
 .question:first-child .in {
   border-left: 5px solid #b7aba5;

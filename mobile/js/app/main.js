@@ -69,6 +69,8 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         name = $t.parent().find(":selected").val();
         app.location = _.where(app.locations, { name: name })[0];
         console.log("Using location", app.location);
+        $('.survey-location').html(app.location.name);
+
         app.collector = $t.parent().find('.name').val();
         $.cookie('collectorName', app.collector, { path: '/' });
         $('.welcome').hide();
@@ -110,6 +112,11 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
           app.answered[question] = 1;
         }
 
+        $t.addClass('tapped').delay(150).queue(function(next){
+            $(this).removeClass("tapped");
+            next();
+        });
+
         app.update(question);
       },
 
@@ -129,12 +136,22 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
           app.answered[question] = 0;
         }
 
+        $t.addClass('tapped').delay(150).queue(function(next){
+            $(this).removeClass("tapped");
+            next();
+        });
+
         app.update(question);
       },
 
       update: function(question) {
         var count = app.answered[question];
         $(".count[data-question='" + question + "']").html(count);
+        if (count === 0) {
+          $(".count[data-question='" + question + "']").addClass('zero');
+        } else {
+          $(".count[data-question='" + question + "']").removeClass('zero');
+        }
       },
 
       /**
@@ -191,7 +208,7 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
                 centroid: app.location.centroid,
                 humanReadableName: app.location.name
               },
-              responses: answered
+              responses: answered || {}
             }
           ]
         };
@@ -240,6 +257,7 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
 
         // And mark them as zero.
         $('.count').html('0');
+        $('.count').addClass('zero');
 
         // Update the counter
         app.counter += 1;
