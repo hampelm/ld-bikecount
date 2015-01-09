@@ -69,7 +69,7 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         name = $t.parent().find(":selected").val();
         app.location = _.where(app.locations, { name: name })[0];
         console.log("Using location", app.location);
-        $('.survey-location').html(app.location.name);
+        $('.survey-location').html("at " + app.location.name);
 
         app.collector = $t.parent().find('.name').val();
         $.cookie('collectorName', app.collector, { path: '/' });

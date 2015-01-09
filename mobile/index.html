@@ -75,10 +75,13 @@
       <% if (question.type !== 'counter') { return; } %>
       <div class="out">
         <div class="question" data-question="<%= question.name %>">
-          <div class="question-text"><%= question.text %></div>
+          <div class="question-text"><%= question.text %>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah </div>
+          <div class="tools">
+            <div class="subtract" data-question="<%= question.name %>">-1</div>
+            <div class="count zero" data-question="<%= question.name %>">0</div>
+            <div class="add" data-question="<%= question.name %>">+1</div>
+          </div>
         </div>
-        <div class="subtract" data-question="<%= question.name %>">-1</div>
-        <div class="count zero" data-question="<%= question.name %>">0</div>
       </div>
     <% }); %>
     </div>

@@ -151,7 +151,7 @@ input, select {
   font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
   background: #58aeff;
   color: #fff;
-  min-height: 83px;
+  min-height: 4em;
   border-radius: 4px;
 }
 
@@ -161,36 +161,45 @@ input, select {
 }
 
 .question-text {
-  max-height: 75px;
+  height: 2em;
   overflow: hidden;
   padding: 5px;
+  margin-bottom: 8px;
 }
 
 .count {
-  position: absolute;
-  top: -0.5em;
-  right: -0.5em;
-  border-radius: 20px;
-  background: #6e6663;
-  color: #ffe;
-  padding: 3px 8px;
+  font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
+  color: #fff;
+}
+
+.tools {
+  overflow: auto;
+  height: 2em;
+}
+
+.count, .add, .subtract {
+  display: inline-block;
+  line-height: 2em;
+  height: 2em;
 }
 
 .count.zero {
+}
+
+.add,
+.subtract {
+  width: 2em;
   background: #fff;
-  color: #6e6663;
+  color: #f15a24;
 }
 
 .subtract {
   font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  color: #f15a24;
-  background: #fff;
-  height: 40px;
-  width: 40px;
-  line-height: 40px;
+  float: left;
+}
+
+.add {
+  float: right;
 }
 
 .subtract.tapped {
