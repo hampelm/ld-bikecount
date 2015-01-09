@@ -4,15 +4,17 @@
     <title>LocalData Counts</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
 
+
+
     <!-- standard viewport tag to set the viewport to the device's width
       , Android 2.3 devices need this so 100% width works properly and
       doesn't allow children to blow up the viewport width-->
-    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
     <!-- width=device-width causes the iPhone 5 to letterbox the app, so
       we want to exclude it for iPhone 5 to allow full screen apps -->
     <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/app.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="css/add2home.css">
 
@@ -44,16 +46,17 @@
     </div>
   </div>
 
-  <!--
+
   <div class="footer">
-    <div class="counter">0 responses</div>
+    <div class="finished">Done - submit results</div>
+    <p><span class="survey-name"></span> <a href="#" class="change-location">Change location</a></p>
   </div>
-  -->
+
 
   <script type="text/template" id="welcome-template">
     <h1><%= name %></h1>
     <h2>What's your name and location?</h2>
-    <input type="text" placeholder="name" class="name">
+    <input type="text" placeholder="Name" class="name" size="15">
     <select class="location">
     </select>
 
@@ -62,23 +65,23 @@
 
   <script type="text/template" id="options-template">
     <% _.each( locations, function( location ){ %>
-    <option value="<%= location.name %>" data-location="<%= location.location %>"><%= location.name %></option>
+    <option value="<%= location.name %>" data-location="<%= location.name %>"><%= location.name %></option>
     <% }); %>
   </script>
 
   <script type="text/template" id="form-template">
     <div style="overflow:auto">
     <% _.each(questions, function(question) { %>
+      <% if (question.type !== 'counter') { return; } %>
       <div class="out">
         <div class="question" data-question="<%= question.name %>">
-        <%= question.text %>
+          <div class="question-text"><%= question.text %></div>
         </div>
         <div class="count" data-question="<%= question.name %>">0</div>
+        <div class="subtract" data-question="<%= question.name %>">-1</div>
       </div>
     <% }); %>
     </div>
-
-    <div class="finished">Submit</div>
   </script>
 
   </body>

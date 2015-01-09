@@ -64,6 +64,13 @@ body.done {
   background: red;
 }
 
+a {
+  font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
+  text-decoration: none;
+  font: ;
+  color: #58aeff;
+}
+
 h1,
 h2,
 input,
@@ -90,14 +97,9 @@ input, select {
   margin-bottom:10px;
 }
 
-
 .name {
   margin-top:15px;
   color: #58aeff;
-}
-
-.wrap {
-  min-height: 100%;
 }
 
 .go {
@@ -111,9 +113,8 @@ input, select {
 }
 
 .container {
-  margin: 10px 10px 0 20px;
+  margin: 10px 10px 10px 20px;
   overflow: auto;
-  padding-bottom: 50px;
 }
 
 .loading,
@@ -148,11 +149,17 @@ input, select {
 
 .question {
   font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
-  border: 5px solid #b7aba5;
+  border: 5px solid #58aeff;
   border-left: 0;
-  background: #b7aba5;
+  background: #58aeff;
   color: #fff;
   min-height: 75px;
+}
+
+.question-text {
+  max-height: 75px;
+  overflow: hidden;
+  padding: 5px;
 }
 
 .count {
@@ -164,6 +171,19 @@ input, select {
   color: #ffe;
   padding: 3px 8px;
 }
+
+.subtract {
+  font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #f15a24;
+  color: #ffe;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+}
+
 
 .question:first-child .in {
   border-left: 5px solid #b7aba5;
@@ -200,17 +220,22 @@ input, select {
 }
 
 .finished {
-  width: 100%;
   background: #58aeff;
+  color: #fff;
   cursor: pointer;
+  margin: 0px auto;
+  margin-bottom: 10px;
+  padding: 20px;
+  font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
+}
+
+.change-location {
+  padding: 25px;
+  display: inline-block;
 }
 
 .footer {
   display: none;
-  position: relative;
-  margin-top: -85px; /* negative value of footer height */
-  height: 50px;
-  clear: both;
   text-align: center;
 }
 

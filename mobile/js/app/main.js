@@ -8,6 +8,7 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
 
       answered: {},
       counter: 0,
+      locations: [],
       location: {},
       collector: '',
       url: '',
@@ -29,6 +30,7 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
           return;
         }
         app.survey = survey;
+        app.locations = locations.locations[survey.slug];
         app.url = '/api/surveys/' + survey.id + '/responses';
 
         // Set the collector name, if we already know it.
@@ -43,8 +45,11 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
 
         // Set up the locations
         compiled = _.template($('#options-template').html());
-        html = compiled(locations);
+        html = compiled({locations: app.locations});
         $('.location').html(html);
+
+        // Show the survey name
+        $('.survey-name').html(survey.name);
 
         $('.go').on('touch', app.login);
 
@@ -62,7 +67,8 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         var name;
 
         name = $t.parent().find(":selected").val();
-        app.location = _.where(locations.locations, { name: name })[0];
+        app.location = _.where(app.locations, { name: name })[0];
+        console.log("Using location", app.location);
         app.collector = $t.parent().find('.name').val();
         $.cookie('collectorName', app.collector, { path: '/' });
         $('.welcome').hide();
@@ -81,8 +87,16 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
 
         // Listen for taps on the responses.
         $('.question').on('touch', app.add);
+        $('.subtract').on('touch', app.subtract);
         $('.finished').on('touch', app.finished);
-        $('.finished').on('touch', function() {console.log("Hey");});
+        $('.change-location').on('touch', app.changeLocation);
+      },
+
+      changeLocation: function(e) {
+        e.preventDefault();
+        $('.form').hide();
+        $('.footer').hide();
+        $('.welcome').show();
       },
 
       add: function(e) {
@@ -94,6 +108,25 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
           app.answered[question] += 1;
         } else {
           app.answered[question] = 1;
+        }
+
+        app.update(question);
+      },
+
+      subtract: function(e) {
+        e.preventDefault();
+        var $t = $(this);
+        var question = $t.attr('data-question');
+
+        if( _.has(app.answered, question)) {
+          app.answered[question] -= 1;
+        } else {
+          app.answered[question] = 0;
+        }
+
+        // Can't go below zero.
+        if (app.answered[question] < 0) {
+          app.answered[question] = 0;
         }
 
         app.update(question);
@@ -152,13 +185,10 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
                 collector: app.collector,
                 type: 'bikeapp'
               },
-              object_id: app.location.name,
+              object_id: app.location.id,
               geo_info: {
-                geometry: {
-                  type: 'Point',
-                  coordinates: app.location.location
-                },
-                centroid: app.location.location,
+                geometry: app.location.geometry,
+                centroid: app.location.centroid,
                 humanReadableName: app.location.name
               },
               responses: answered
@@ -199,12 +229,17 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
        * Reset the fields, visually indicate we're submitting the data.
        */
       reset: function() {
+
+        // Reset the counts
         app.answered = {};
-        $('.in').removeClass('selected');
+
         $('body').addClass('success').delay(300).queue(function(next){
             $(this).removeClass("success");
             next();
         });
+
+        // And mark them as zero.
+        $('.count').html('0');
 
         // Update the counter
         app.counter += 1;
