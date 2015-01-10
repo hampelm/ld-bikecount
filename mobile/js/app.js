@@ -9,6 +9,9 @@ requirejs.config({
       "jquery.hammer": {
         deps: ["jquery"],
         exports: '$'
+      },
+      'leaflet': {
+        exports: 'L'
       }
     }
 });

@@ -1,7 +1,14 @@
 /*jslint nomen: true */
 /*globals define: true */
 
-define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/api'], function($, _, jqc, locations, api) {
+define(['jquery.hammer',
+        'leaflet',
+        'underscore',
+        'jquery.cookie',
+        'countdown',
+        'app/locations',
+        'app/api'],
+function($, L, _, jqc, countdown, locations, api) {
   $(function() {
 
     var app = {
@@ -22,7 +29,6 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
 
       setup: function(survey) {
         console.log("Using survey", survey);
-
         var compiled, html;
 
         if (!survey) {
@@ -33,15 +39,20 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         app.locations = locations.locations[survey.slug];
         app.url = '/api/surveys/' + survey.id + '/responses';
 
-        // Set the collector name, if we already know it.
-        if ($.cookie('collectorName') !== null){
-          $('.name').val($.cookie('collectorName'));
+        // Do we need a timer?
+        if (survey.slug === 'pspl-age-gender' || survey.slug === 'pspl-template') {
+          app.userTimer = true;
         }
 
         // Set up the welcome screen
         compiled = _.template($('#welcome-template').html());
         html = compiled(survey);
         $('.welcome').html(html);
+
+        // Set the collector name, if we already know it.
+        if ($.cookie('collectorName')){
+          $('.name').val($.cookie('collectorName'));
+        }
 
         // Set up the locations
         compiled = _.template($('#options-template').html());
@@ -62,30 +73,89 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
        */
       login: function(e) {
         e.preventDefault();
+        clearInterval(app.timer);
 
         var $t = $(this);
-        var name;
 
+        var name;
         name = $t.parent().find(":selected").val();
+
+        app.collector = $t.parent().find('.name').val();
+        if (app.collector === '') {
+          $t.parent().find('.name').addClass('missing');
+          return;
+        }
+        $.cookie('collectorName', app.collector, { path: '/' });
+        console.log("Set cookie", $.cookie('collectorName'));
+
         app.location = _.where(app.locations, { name: name })[0];
         console.log("Using location", app.location);
         $('.survey-location').html("at " + app.location.name);
 
-        app.collector = $t.parent().find('.name').val();
-        $.cookie('collectorName', app.collector, { path: '/' });
         $('.welcome').hide();
         $('.form').show();
         $('.footer').show();
+        app.mapping();
 
         api.getForm(app.form);
       },
 
+      mapping: function() {
+        console.log("Location", app.location);
+        if (!app.map) {
+          app.map = L.map('map');
+          L.tileLayer('//a.tiles.mapbox.com/v3/matth.map-yyr7jb6r/{z}/{x}/{y}.png', {
+            maxZoom: 18
+          }).addTo(app.map);
+        }
+        if (app.layer) {
+          app.map.removeLayer(app.layer);
+        }
+
+        app.map.setView([app.location.centroid[1], app.location.centroid[0]], 18);
+
+        L.geoJson({
+          type: "Feature",
+          geometry: app.location.geometry
+        }, {
+          style: {
+            color: "#ffad00",
+            opacity: 1,
+            fillColor: "#ffad00"
+          },
+          pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+              radius: 15,
+              color: "#ffad00",
+              opacity: 1,
+              fillColor: "#ffad00"
+            });
+          }
+        }).addTo(app.map);
+      },
+
       form: function(data) {
-        console.log("Setting up form", data);
         var compiled, html;
         compiled = _.template($('#form-template').html());
         html = compiled(data);
         $('.form').html(html);
+
+        // Set up the timer.
+        if (app.userTimer) {
+          // Get a date 10 minutes from now
+          var targetDate = new Date();
+          targetDate.setMinutes(targetDate.getMinutes() + 10);
+
+          // Note the timer in the submit.
+          app.timer = setInterval(function(){
+            $('.clock').html("in " + countdown(targetDate).minutes + ":" + countdown(targetDate).seconds);
+            if (countdown(targetDate).minutes === 0 && countdown(targetDate).seconds === 0) {
+              $('body').addClass('timesup');
+              $('.clock').html("&mdash; time's up");
+              clearInterval(app.timer);
+            }
+          }, 1000);
+        }
 
         // Listen for taps on the responses.
         $('.question').on('touch', app.add);
@@ -95,7 +165,9 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
       },
 
       changeLocation: function(e) {
-        e.preventDefault();
+        if (e) {
+          e.preventDefault();
+        }
         $('.form').hide();
         $('.footer').hide();
         $('.welcome').show();
@@ -105,6 +177,10 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         e.preventDefault();
         var $t = $(this);
         var question = $t.attr('data-question');
+        var action = $(e.target).attr('data-action');
+
+        console.log("Action", action);
+        if(action === 'subtract') { return; }
 
         if( _.has(app.answered, question)) {
           app.answered[question] += 1;
@@ -158,6 +234,7 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
        * Things that should happen when all the fields are complete
        */
       finished: function() {
+        clearInterval(app.timer);
         app.submit();
 
         // reset the app after a brief delay
@@ -190,11 +267,17 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
        * Submit selected data
        */
       submit: function() {
+        $('body').removeClass('timesup');
+
         // Make a clone in case the answers change before this submits.
         var answered = _.clone(app.answered);
 
-        // Prepare in the format that LocalData wants
-        // Wow, this is ugly.
+        var notes = $('.notes').val();
+        if(notes) {
+          answered.notes = notes;
+        }
+
+        // Prepare data in the format that LocalData wants
         var data = {
           responses: [
             {
@@ -250,11 +333,6 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         // Reset the counts
         app.answered = {};
 
-        $('body').addClass('success').delay(300).queue(function(next){
-            $(this).removeClass("success");
-            next();
-        });
-
         // And mark them as zero.
         $('.count').html('0');
         $('.count').addClass('zero');
@@ -262,6 +340,12 @@ define(['jquery.hammer', 'underscore', 'jquery.cookie', 'app/locations', 'app/ap
         // Update the counter
         app.counter += 1;
         app.update();
+
+        $('body').addClass('success').delay(300).queue(function(next){
+          $('body').removeClass("success");
+          app.changeLocation();
+          next();
+        }.bind(this));
       }
     };
 

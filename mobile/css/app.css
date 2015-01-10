@@ -60,6 +60,10 @@ body.success {
   transition: all .3s ease-in;
 }
 
+body.timesup {
+  background: #f15a24;
+}
+
 body.done {
   background: red;
 }
@@ -85,6 +89,20 @@ select option {
   font-family: NeuzeitOfficeW01-Regular, Open Sans, Helvetica, sans-serif;
   font-size:30px;
   border: 5px solid #58aeff;
+}
+
+textarea {
+  font-family: NeuzeitOfficeW01-Regular, Open Sans, Helvetica, sans-serif;
+  font-size: 16px;
+  border: 5px solid #58aeff;
+  display: block;
+  clear: both;
+  width: 90%;
+  padding: 5px;
+}
+
+input.missing {
+  border-color: #f15a24;
 }
 
 select,
@@ -175,6 +193,7 @@ input, select {
 .tools {
   overflow: auto;
   height: 2em;
+  border-top: 1px solid #daedff;
 }
 
 .count, .add, .subtract {
@@ -189,17 +208,24 @@ input, select {
 .add,
 .subtract {
   width: 2em;
-  background: #fff;
-  color: #f15a24;
 }
 
 .subtract {
   font-family: Neuzeit Office W01 Bold, Open Sans, Helvetica, sans-serif;
-  float: left;
+  background: #fff;
+  border-radius: 10px;
+  color: #f18964;
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  line-height: 1.75em;
+  height: 1.75em;
+  width: 1.75em;
 }
 
 .add {
-  float: right;
+  float: left;
+  border-right: 1px solid #daedff;
 }
 
 .subtract.tapped {
@@ -261,4 +287,7 @@ input, select {
   text-align: center;
 }
 
+#map {
+  height: 250px;
+}
 

@@ -55,7 +55,6 @@ define(function (require) {
 
   api.getSurveyFromSlug = function(callback) {
     api.setSurveyIdFromSlug(function(id) {
-      console.log("Got stuff", api, id);
       api.getSurvey(id, callback);
     }.bind(this));
   };
