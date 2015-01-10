@@ -58,9 +58,18 @@ function($, L, _, jqc, countdown, locations, api) {
         compiled = _.template($('#options-template').html());
         html = compiled({locations: app.locations});
         $('.location').html(html);
+        $('.location').on('change', function() {
+          app.location = _.findWhere(app.locations, { name: this.value });
+          app.setMapLocation();
+        });
 
         // Show the survey name
         $('.survey-name').html(survey.name);
+
+        // Set up the map
+        app.mapping();
+        app.location = app.locations[0];
+        app.setMapLocation();
 
         $('.go').on('touch', app.login);
 
@@ -77,8 +86,6 @@ function($, L, _, jqc, countdown, locations, api) {
 
         var $t = $(this);
 
-        var name;
-        name = $t.parent().find(":selected").val();
 
         app.collector = $t.parent().find('.name').val();
         if (app.collector === '') {
@@ -88,33 +95,36 @@ function($, L, _, jqc, countdown, locations, api) {
         $.cookie('collectorName', app.collector, { path: '/' });
         console.log("Set cookie", $.cookie('collectorName'));
 
+        var name;
+        name = $t.parent().find(":selected").val();
         app.location = _.where(app.locations, { name: name })[0];
-        console.log("Using location", app.location);
+        app.setMapLocation();
         $('.survey-location').html("at " + app.location.name);
 
         $('.welcome').hide();
         $('.form').show();
         $('.footer').show();
-        app.mapping();
 
         api.getForm(app.form);
       },
 
       mapping: function() {
-        console.log("Location", app.location);
         if (!app.map) {
           app.map = L.map('map');
           L.tileLayer('//a.tiles.mapbox.com/v3/matth.map-yyr7jb6r/{z}/{x}/{y}.png', {
             maxZoom: 18
           }).addTo(app.map);
         }
+      },
+
+      setMapLocation: function() {
         if (app.layer) {
           app.map.removeLayer(app.layer);
         }
 
         app.map.setView([app.location.centroid[1], app.location.centroid[0]], 18);
 
-        L.geoJson({
+        app.layer = L.geoJson({
           type: "Feature",
           geometry: app.location.geometry
         }, {
