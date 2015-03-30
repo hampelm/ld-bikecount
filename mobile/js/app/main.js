@@ -282,8 +282,9 @@ function($, L, _, jqc, countdown, locations, api) {
         // Make a clone in case the answers change before this submits.
         var answered = _.clone(app.answered);
 
-        var notes = $('.notes').val();
+        var notes = $('#notes').val();
         if(notes) {
+          // console.log("Notes", answered, notes);
           answered.notes = notes;
         }
 
