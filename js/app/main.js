@@ -40,11 +40,17 @@ define([
         app.results.on('reset', app.render);
 
         // Create the map
-        var map = L.map('map').setView([51.505, -0.09], 13);
+        var map = L.map('map', {
+          maxZoom: 19
+        }).setView([51.505, -0.09], 13);
         app.map = map;
 
         // add an OpenStreetMap tile layer
-        L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-n9bps30s/{z}/{x}/{y}.png').addTo(map);
+        L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-yyr7jb6r/{z}/{x}/{y}.png', {
+          maxZoom: 19
+        }).addTo(map);
+
+        console.log("Created map", map);
       },
 
       links: function() {

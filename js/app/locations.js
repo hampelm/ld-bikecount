@@ -82,7 +82,739 @@ define(function (require) {
         name:     'Santa Clara West',
         geometry: {"type":"Point","coordinates":[-121.888285097113,37.3372554372969]}
       }]
-    }
+    },
+
+    "mspf-pedestrian": [{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.39549785852432,
+            37.794062943376915
+          ]
+        },
+        name: 'a',
+        id: 'gehl-mspf-a'
+      },{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.39536374807356,
+            37.793969683943764
+          ]
+        },
+        name: 'b',
+        id: 'gehl-mspf-b'
+      },{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.39990472793579,
+            37.7905041647295
+          ]
+        },
+        name: 'c',
+        id: 'gehl-mspf-c'
+      },{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.39998787641524,
+            37.79026252613533
+          ]
+        },
+        name: 'd',
+        id: 'gehl-mspf-d'
+      },{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.4054381251335,
+            37.786160908408064
+          ]
+        },
+        name: 'e',
+        id: 'gehl-mspf-e'
+      },{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.40523695945738,
+            37.786137591067366
+          ]
+        },
+        name: 'f',
+        id: 'gehl-mspf-f'
+      },{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.41081863641739,
+            37.781902192067776
+          ]
+        },
+        name: 'g',
+        id: 'gehl-mspf-g'
+      },{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.41098761558531,
+            37.78158844915323
+          ]
+        },
+        name: 'h',
+        id: 'gehl-mspf-h'
+      },{
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.4167624115944,
+            37.77723194876507
+          ]
+        },
+        name: 'i',
+        id: 'gehl-mspf-i'
+      }, {
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -122.41691797971724,
+            37.77692666611924
+          ]
+        },
+        name: 'j',
+        id: 'gehl-mspf-j'
+    }],
+
+
+    "mspf-stationary": [{
+      "id": "N1",
+      "name": "N1 Tree of Changes",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39508479833601,
+          37.79446141417424
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "name": "N2 Autodesk Keystone",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39516258239745,
+          37.794406306638834
+        ]
+      }
+    },
+    {
+      "id": "S11",
+      "name": "S11 Autodesk Keystone",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3949882388115,
+          37.794264298569715
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "name": "N3 Neuroflowers",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39526718854904,
+          37.79430880859089
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "name": "N4 Musical Pedals",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39534229040146,
+          37.79424522283814
+        ]
+      }
+    },
+    {
+      "id": "S10",
+      "name": "S10 Relax",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39509016275407,
+          37.79418799561385
+        ]
+      }
+    },
+    {
+      "id": "S10",
+      "name": "S10 Relax",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3951679468155,
+          37.79412652928656
+        ]
+      }
+    },
+    {
+      "id": "S8",
+      "name": "S8 Chime SF",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39542007446289,
+          37.79393153232357
+        ]
+      }
+    },
+    {
+      "id": "S7",
+      "name": "S7 The Zen Door",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39549785852432,
+          37.79386582670924
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "name": "N5 The Cephalapod",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3956561088562,
+          37.79399723787945
+        ]
+      }
+    },
+    {
+      "id": "N6",
+      "name": "N6 Common Ground",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39584654569624,
+          37.79381283826803
+        ]
+      }
+    },
+    {
+      "id": "N17",
+      "name": "N17 Protohouse",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40049481391907,
+          37.79032611531567
+        ]
+      }
+    },
+    {
+      "id": "N15",
+      "name": "N15 YBCA Tag Tunnel",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40011930465697,
+          37.79035579024779
+        ]
+      }
+    },
+    {
+      "id": "N13",
+      "name": "N13 Daily Boost",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39990472793579,
+          37.79053595922254
+        ]
+      }
+    },
+    {
+      "id": "S16",
+      "name": "S16 Peak Experience",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40009784698486,
+          37.790211654751644
+        ]
+      }
+    },
+    {
+      "id": "S16",
+      "name": "S16 Peak Experience",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40018904209137,
+          37.79013746725435
+        ]
+      }
+    },
+    {
+      "id": "S20",
+      "name": "S20 Understory",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40036875009537,
+          37.79000604921915
+        ]
+      }
+    },
+    {
+      "id": "S22",
+      "name": "S22 Bench Go Round",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40045994520187,
+          37.78984919512922
+        ]
+      }
+    },
+    {
+      "id": "S24",
+      "name": "S24 Data Lantern",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40064501762389,
+          37.78968386207941
+        ]
+      }
+    },
+    {
+      "id": "S26",
+      "name": "S26 Mineral Benches",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40095347166061,
+          37.78944857979379
+        ]
+      }
+    },
+    {
+        "id": "N19",
+        "name": "N19 Data Lantern",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40090787410736,
+          37.78979832346099
+        ]
+      }
+    },
+    {
+      "id": "N33",
+      "name": "N33 Gensler Portal 1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40575194358824,
+          37.78598496829208
+        ]
+      }
+    },
+    {
+      "id": "S42",
+      "name": "S42 Rainbow Prismatic Experience",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4055990576744,
+          37.78574119515
+        ]
+      }
+    },
+    {
+      "id": "S40",
+      "name": "S40 Gensler Portal 2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40553468465805,
+          37.78587898006826
+        ]
+      }
+    },
+    {
+      "id": "S38",
+      "name": "S38 Unsilence the Newsbin",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40539252758025,
+          37.78600404615623
+        ]
+      }
+    },
+    {
+      "id": "S36",
+      "name": "S36 Gensler Portal 4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40530401468277,
+          37.786035842585534
+        ]
+      }
+    },
+    {
+      "id": "S34",
+      "name": "S34 Meetwall",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40523427724837,
+          37.786076118043
+        ]
+      }
+    },
+    {
+      "id": "S32",
+      "name": "S32 Tiny and Upside Down",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40514844655989,
+          37.78616938743922
+        ]
+      }
+    },
+    {
+      "id": "N29",
+      "name": "N29 Walk [Market St]",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40522623062132,
+          37.78636440488727
+        ]
+      }
+    },
+    {
+      "id": "N31",
+      "name": "N31 Gensler Portal 3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40535765886305,
+          37.78625841720761
+        ]
+      }
+    },
+    {
+      "id": "S54",
+      "name": "S54 Ping Pong",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41187006235123,
+          37.780874043088666
+        ]
+      }
+    },
+    {
+      "id": "S52",
+      "name": "S52 Tenderloin Exertrail",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41162329912186,
+          37.78106483470159
+        ]
+      }
+    },
+    {
+      "id": "S50",
+      "name": "S50 Shimmering Stars",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41132557392122,
+          37.7812853043965
+        ]
+      }
+    },
+    {
+      "id": "N43",
+      "name": "N43 Peep Show",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41146236658096,
+          37.78142097772804
+        ]
+      }
+    },
+    {
+      "id": "N35",
+      "name": "N35 Street Sketches",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41071671247481,
+          37.782008185994705
+        ]
+      }
+    },
+    {
+      "id": "N37",
+      "name": "N37 Market [Scene]",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4107998609543,
+          37.78193611014092
+        ]
+      }
+    },
+    {
+      "id": "N39",
+      "name": "N39 Show Box",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4109822511673,
+          37.78180043775492
+        ]
+      }
+    },
+    {
+      "id": "N41",
+      "name": "N41 Studio for Urban Project",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41105735301971,
+          37.78174108100774
+        ]
+      }
+    },
+    {
+      "id": "S46",
+      "name": "S46 Hyphae Planter",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41064429283142,
+          37.781825876346275
+        ]
+      }
+    },
+    {
+      "id": "S44",
+      "name": "S44 Ping Pong",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41052091121674,
+          37.78191279146731
+        ]
+      }
+    },
+    {
+      "id": "S48",
+      "name": "S48 Timber Valley",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41077035665512,
+          37.781726241813494
+        ]
+      }
+    },
+    {
+      "id": "N45",
+      "name": "N45 Ghost Arroyos",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41626352071762,
+          37.77762627031679
+        ]
+      }
+    },
+    {
+      "id": "N47",
+      "name": "N47 Bookmark",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4165666103363,
+          37.77751179008296
+        ]
+      }
+    },
+    {
+      "id": "N49",
+      "name": "N49 Fog Plane",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4167275428772,
+          37.77739730967186
+        ]
+      }
+    },
+    {
+      "id": "N53",
+      "name": "N53 3 For Life",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4167624115944,
+          37.77723194876507
+        ]
+      }
+    },
+    {
+      "id": "N55",
+      "name": "N55 Exploratorium Anchor",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41689920425415,
+          37.777117467920625
+        ]
+      }
+    },
+    {
+      "id": "N57",
+      "name": "N57 Play Everyday",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41712450981142,
+          37.77710686783345
+        ]
+      }
+    },
+    {
+      "id": "N60",
+      "name": "N60 Mycelium Theater",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41741955280304,
+          37.77678250443156
+        ]
+      }
+    },
+    {
+      "id": "N59",
+      "name": "N59 Ember",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41723716259001,
+          37.77684398518567
+        ]
+      }
+    },
+    {
+      "id": "S58",
+      "name": "S58 Guerilla Street Museum",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41712182760237,
+          37.77672102362631
+        ]
+      }
+    },
+    {
+      "id": "S56",
+      "name": "S56 Living Roofs",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41695016622542,
+          37.77684822523581
+        ]
+      }
+    },
+    {
+      "id": "N21",
+      "name": "N21 Gensler Portal 5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4048963189125,
+          37.786627253676905
+        ]
+      }
+    },
+    {
+      "id": "N23",
+      "name": "N23 Active Rest",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40498214960098,
+          37.78655306258097
+        ]
+      }
+    },
+    {
+      "id": "N27",
+      "name": "N27 Adaptive Playscapes",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40510016679764,
+          37.78646615291675
+        ]
+      }
+    },
+    {
+      "id": "N27",
+      "name": "N27 Adaptive Playscapes",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.404628098011,
+          37.78662937342141
+        ]
+      }
+    },
+    {
+      "id": "S14",
+      "name": "S14 Sound of Emotion",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39980280399324,
+          37.790432097161286
+        ]
+      }
+    },
+    {
+      "id": "S12",
+      "name": "S12 News to Me",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.39958018064499,
+          37.79061650521033
+        ]
+      }
+    }]
+
   };
 
 });

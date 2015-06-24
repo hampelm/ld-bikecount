@@ -28,7 +28,7 @@ function($, L, _, jqc, countdown, locations, api) {
       },
 
       setup: function(survey) {
-        console.log("Using survey", survey);
+        console.log("Using survey xxx", survey);
         var compiled, html;
 
         if (!survey) {
@@ -37,6 +37,15 @@ function($, L, _, jqc, countdown, locations, api) {
         }
         app.survey = survey;
         app.locations = locations.locations[survey.slug];
+
+
+        var i;
+        for (i = 0; i < app.locations.length; i++) {
+          if (app.locations[i].geometry.type === 'Point') {
+            app.locations[i].centroid = app.locations[i].geometry.coordinates;
+          }
+        }
+
         app.url = '/api/surveys/' + survey.id + '/responses';
 
         // Do we need a timer?
@@ -112,7 +121,7 @@ function($, L, _, jqc, countdown, locations, api) {
         if (!app.map) {
           app.map = L.map('map');
           L.tileLayer('//a.tiles.mapbox.com/v3/matth.map-yyr7jb6r/{z}/{x}/{y}.png', {
-            maxZoom: 18
+            maxZoom: 19
           }).addTo(app.map);
         }
       },
