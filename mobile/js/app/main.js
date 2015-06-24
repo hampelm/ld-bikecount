@@ -28,7 +28,7 @@ function($, L, _, jqc, countdown, locations, api) {
       },
 
       setup: function(survey) {
-        console.log("Using survey xxx", survey);
+        console.log("Using survey", survey);
         var compiled, html;
 
         if (!survey) {
@@ -39,6 +39,9 @@ function($, L, _, jqc, countdown, locations, api) {
         app.locations = locations.locations[survey.slug];
 
 
+        // Go through the list of locations;
+        // if they are points, assign the coordinates to the centroid
+        // (to avoide data duplication)
         var i;
         for (i = 0; i < app.locations.length; i++) {
           if (app.locations[i].geometry.type === 'Point') {
@@ -77,6 +80,7 @@ function($, L, _, jqc, countdown, locations, api) {
 
         // Set up the map
         app.mapping();
+        console.log("Setting up using locations", app.locations[0]);
         app.location = app.locations[0];
         app.setMapLocation();
 
